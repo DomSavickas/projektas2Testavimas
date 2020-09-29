@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Projektas2</string>
+    <string name="tekstas">Tekstas</string>
+    <string name="skaičiuoti">Skaičiuoti</string>
 </resources>
