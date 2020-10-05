@@ -17,7 +17,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
     TextView Ptekstas;
     EditText Stekstas;
     Button Sbutton;
@@ -39,33 +39,41 @@ public class MainActivity extends AppCompatActivity {
                 toast.show();
             }
         });
-    }
-        /*Stekstas.addTextChangedListener(new TextWatcher() {
-            Antroji antroji = new Antroji();
-            antroji.onTextChanged();
-            antroji.afterTextChanged();
+
+        Stekstas.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String text = Stekstas.getText().toString();
+                text = text.replace("\n", " ");
+                String[] textArray = text.split(" ");
+                Ptekstas.setText("Žodžiai: " + textArray.length);
+            }
+
+            public void afterTextChanged(Editable editable) {
+                String currentText = editable.toString();
+                int currentLength = currentText.length();
+                Ptekstas.setText("Current length: " + currentLength);
+            }
         });
-        Spinner Zspinner = (Spinner) findViewById(R.id.Zspinner);
-        Zspinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
-
-        List<String> categories = new ArrayList<String>();
-        categories.add("Žodžiai");
-        categories.add("Ženklai");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
-        Zspinner.setAdapter(dataAdapter);
+        Spinner spinner = (Spinner) findViewById(R.id.Zspinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.tekstas, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
     }
+    @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-        String item = parent.getItemAtPosition(position).toString();
-        // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+        String text = parent.getItemAtPosition(position).toString();
+        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
     }
-    public void onNothingSelected(AdapterView<?> arg0) {
-        // TODO Auto-generated method stub
-    }*/
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+}
 }
