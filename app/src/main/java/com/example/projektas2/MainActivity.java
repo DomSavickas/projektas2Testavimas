@@ -18,10 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
-    TextView Ptekstas;
-    EditText Stekstas;
-    Button Sbutton;
-    Spinner Zspinner;
+    private TextView Ptekstas;
+    private EditText Stekstas;
+    private Spinner Zspinner;
+
+    public MainActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,16 +32,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         Ptekstas = (TextView) findViewById(R.id.Ptekstas);
         Stekstas = (EditText) findViewById(R.id.Stekstas);
-        Sbutton = (Button) findViewById(R.id.Sbutton);
-        Sbutton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "Įrašykite tekstą",
-                        Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });
-
+        Spinner spinner = (Spinner) findViewById(R.id.Zspinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.tekstas, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+/*
         Stekstas.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int before, int count) {
 
@@ -52,18 +51,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Ptekstas.setText("Žodžiai: " + textArray.length);
             }
 
-            public void afterTextChanged(Editable editable) {
-                String currentText = editable.toString();
+            public void afterTextChanged(Editable Stekstas) {
+                String currentText = Stekstas.toString();
                 int currentLength = currentText.length();
                 Ptekstas.setText("Current length: " + currentLength);
             }
-        });
-        Spinner spinner = (Spinner) findViewById(R.id.Zspinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.tekstas, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+        });*/
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -75,4 +68,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+    public void onSbuttonClick (View view){
+        Toast.makeText(this, this.Zspinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+        if (this.Zspinner.getSelectedItem().toString().equalsIgnoreCase(getString(R.string.Selection_Char))) {
+            String text = Stekstas.getText().toString();
+            text = text.replace("\n", " ");
+            String[] textArray = text.split(" ");
+            Ptekstas.setText("Žodžiai: " + textArray.length);
+        } else {
+            String currentText = Stekstas.toString();
+            int currentLength = currentText.length();
+            Ptekstas.setText("Simboliai: " + currentLength);
+        }
+    };
 }
