@@ -41,14 +41,11 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, this.Zspinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
         if (this.Zspinner.getSelectedItem().toString().equalsIgnoreCase(getString(R.string.Selection_Char))) {
             String currentText = Stekstas.toString();
-            int currentLength = currentText.length();
-            Ptekstas.setText("Simboliai: " + currentLength);
+            Ptekstas.setText("Simboliai: " + CharWordCounter.CharCounter(currentText));
         }
         else {
             String text = Stekstas.getText().toString();
-            text = text.replace("\n", " ");
-            String[] textArray = text.split(" ");
-            Ptekstas.setText("Žodžiai: " + textArray.length);
+            Ptekstas.setText("Žodžiai: " + CharWordCounter.WordCounter(text));
         }
     };
 }
