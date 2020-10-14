@@ -2,9 +2,9 @@
     <string name="app_name">Projektas2</string>
     <string name="tekstas">Tekstas</string>
     <string name="skaičiuoti">Skaičiuoti</string>
-    <string name="Selection_Char">Chars</string>
+    <string name="Selection_Char">Simboliai</string>
     <string-array name="tekstas">
-        <item>Žodžiai</item>
         <item>Simboliai</item>
+        <item>Žodžiai</item>
     </string-array>
 </resources>
