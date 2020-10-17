@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView Ptekstas;
-    private EditText Stekstas;
-    private Spinner Zspinner;
+    private TextView TextViewForResults;
+    private EditText EditTextViewForWriting;
+    private Spinner DropdownList;
 
     public MainActivity() {
     }
@@ -30,22 +30,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.Ptekstas = (TextView) findViewById(R.id.Ptekstas);
-        this.Stekstas = (EditText) findViewById(R.id.Stekstas);
-        this.Zspinner = (Spinner) findViewById(R.id.Zspinner);
+        this.TextViewForResults = (TextView) findViewById(R.id.TextViewForResults);
+        this.EditTextViewForWriting = (EditText) findViewById(R.id.EditTextViewForWriting);
+        this.DropdownList = (Spinner) findViewById(R.id.DropdownList);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tekstas, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R. layout.simple_spinner_dropdown_item);
-        this.Zspinner.setAdapter(adapter);
+        this.DropdownList.setAdapter(adapter);
     }
-    public void onSbuttonClick (View view){
-        Toast.makeText(this, this.Zspinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-        if (this.Zspinner.getSelectedItem().toString().equalsIgnoreCase(getString(R.string.Selection_Char))) {
-            String currentText = Stekstas.toString();
-            Ptekstas.setText("Simboliai: " + CharWordCounter.CharCounter(currentText));
+    public void onButtonForCalculationClick (View view){
+        Toast.makeText(this, this.DropdownList.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+        if (this.DropdownList.getSelectedItem().toString().equalsIgnoreCase(getString(R.string.Selection_Char))) {
+            String currentText = EditTextViewForWriting.getText().toString();
+            int testCharLength = CharWordCounter.CharCounter(currentText);
+            if (currentText.matches("")){
+                TextViewForResults.setText("");
+                Toast.makeText(this, "Įveskite tekstą", Toast.LENGTH_SHORT).show();}
+            else {
+                TextViewForResults.setText("Simboliai: " + CharWordCounter.CharCounter(currentText));}
         }
         else {
-            String text = Stekstas.getText().toString();
-            Ptekstas.setText("Žodžiai: " + CharWordCounter.WordCounter(text));
+            String text = EditTextViewForWriting.getText().toString();
+            int testWordLength = CharWordCounter.WordCounter(text);
+            if (text.matches("")){
+                TextViewForResults.setText("");
+                Toast.makeText(this, "Įveskite tekstą", Toast.LENGTH_SHORT).show();}
+            else {
+                TextViewForResults.setText("Žodžiai: " + CharWordCounter.WordCounter(text));}
         }
     };
 }

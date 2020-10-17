@@ -1,6 +1,7 @@
 package com.example.projektas2;
 
-public class CharWordCounter {
+public class CharWordCounter
+{
     public static int CharCounter(String currentText)
     {
         int currentLength = currentText.length();
