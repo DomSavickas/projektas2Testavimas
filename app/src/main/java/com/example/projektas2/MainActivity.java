@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView TextViewForResults;
     private EditText EditTextViewForWriting;
     private Spinner DropdownList;
+    private Button ButtonForCalculation;
 
     public MainActivity() {
     }

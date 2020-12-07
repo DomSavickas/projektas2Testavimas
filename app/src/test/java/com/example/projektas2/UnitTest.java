@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class UnitTest {
     @Test(expected = NullPointerException.class)
     public void Given_NullString_When_CharCounterIsCalled_Then_NullPointerExceptionIsThrown(){
        CharWordCounter.CharCounter(null);
